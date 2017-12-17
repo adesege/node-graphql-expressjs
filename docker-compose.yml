@@ -1,0 +1,23 @@
+version: "2"
+services: 
+  web: 
+    build: . 
+    restart: always
+    image: crypto-dca-api:latest 
+    container_name: nge-web
+    environment: 
+      - NODE_ENV=production 
+    ports: 
+      - "5000:5000"
+
+  postgres: 
+    build: ./images/postgres
+    image: crypto-dca-db:latest 
+    container_name: nge-db
+    volumes:
+      - crypto-dca-db:/var/lib/postgresql/data 
+    ports: 
+      - "5432:5432"
+volumes: 
+  crypto-dca-db: 
+    driver: local
